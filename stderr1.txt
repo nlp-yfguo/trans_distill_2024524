@@ -1,0 +1,2188 @@
++ source /home/yfguo/scripts/init_conda.sh
++++ /home/yfguo/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /home/yfguo/miniconda3/bin/conda
+++++ dirname /home/yfguo/miniconda3/bin
++++ PATH=/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ /home/yfguo/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++++ eval 'PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++++ PS1='(base) '
+++++ export PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ export CONDA_PREFIX=/home/yfguo/miniconda3
+++++ CONDA_PREFIX=/home/yfguo/miniconda3
+++++ export CONDA_SHLVL=1
+++++ CONDA_SHLVL=1
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ conda activate Trans_base
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate Trans_base
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate Trans_base
+++ /home/yfguo/miniconda3/bin/conda shell.posix activate Trans_base
++ ask_conda='PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++ eval 'PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++ PS1='(Trans_base) '
+++ export PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ export CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ export CONDA_SHLVL=2
+++ CONDA_SHLVL=2
+++ export CONDA_DEFAULT_ENV=Trans_base
+++ CONDA_DEFAULT_ENV=Trans_base
+++ export 'CONDA_PROMPT_MODIFIER=(Trans_base) '
+++ CONDA_PROMPT_MODIFIER='(Trans_base) '
+++ export CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python enfr_latest_2teacher_train_distill_sample_CAB04061.py
+Design models with seed: 666666
+Load steacher model from: /home/yfguo/transformer_924/expm/dividedata/rs_3072/base_FT_enfr_bybase300k_low/std/eva_2.571_28.52.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/enfr_base_100k/std_20epochs/eva_2_2.630_2.645_29.63.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/base_FT_enfr_300k/std/eva_2.595_28.78.h5
+Init lr: 1e-05, Dev Loss/Error: 2.380 29.63
+Average loss over 10922631 tokens: 1.023, valid loss/error: 2.081 29.54
+New best model saved
+Average loss over 10912242 tokens: 1.018, valid loss/error: 1.889 29.48
+New best model saved
+Average loss over 10903525 tokens: 1.011, valid loss/error: 1.688 29.45
+New best model saved
+Average loss over 10935674 tokens: 1.007, valid loss/error: 1.556 29.45
+New best model saved
+Average loss over 10927192 tokens: 1.007, valid loss/error: 1.396 29.42
+New best model saved
+Average loss over 10898419 tokens: 1.004, valid loss/error: 1.242 29.38
+New best model saved
+Average loss over 10919645 tokens: 1.009, valid loss/error: 1.017 29.37
+New best model saved
+Average loss over 10909413 tokens: 1.004, valid loss/error: 0.860 29.39
+New best model saved
+Average loss over 10912747 tokens: 1.005, valid loss/error: 0.657 29.37
+New best model saved
+Average loss over 10926721 tokens: 0.997, valid loss/error: 0.584 29.39
+New best model saved
+Traceback (most recent call last):
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 509, in <module>
+    terr, done_tokens, cur_checkid, remain_steps, _Dws = train(low_td,middle_td,high_td, tl, vd, nvalid, stu_optimizer, stu_lrsch, high_teach_model,teach_model,student_model, lossf,distilllossf,
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 96, in train
+    teach_out_softmax_withoutT, teach_out_sotfmax_byT, teach_out = teach_model(seq_batch, oi)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/distill_NMT.py", line 56, in forward
+    return self.dec(self.enc(inpute, _mask), inputo, _mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/Encoder.py", line 130, in forward
+    out = net(out, mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/Encoder.py", line 45, in forward
+    context = self.attn(inputs, mask=mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/modules/base.py", line 863, in forward
+    outs = self.drop(outs)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1607, in __getattr__
+    _buffers = self.__dict__['_buffers']
+KeyError: None
++ source /home/yfguo/scripts/init_conda.sh
++++ /home/yfguo/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /home/yfguo/miniconda3/bin/conda
+++++ dirname /home/yfguo/miniconda3/bin
++++ PATH=/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ /home/yfguo/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++++ eval 'PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++++ PS1='(base) '
+++++ export PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ export CONDA_PREFIX=/home/yfguo/miniconda3
+++++ CONDA_PREFIX=/home/yfguo/miniconda3
+++++ export CONDA_SHLVL=1
+++++ CONDA_SHLVL=1
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ conda activate Trans_base
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate Trans_base
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate Trans_base
+++ /home/yfguo/miniconda3/bin/conda shell.posix activate Trans_base
++ ask_conda='PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++ eval 'PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++ PS1='(Trans_base) '
+++ export PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ export CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ export CONDA_SHLVL=2
+++ CONDA_SHLVL=2
+++ export CONDA_DEFAULT_ENV=Trans_base
+++ CONDA_DEFAULT_ENV=Trans_base
+++ export 'CONDA_PROMPT_MODIFIER=(Trans_base) '
+++ CONDA_PROMPT_MODIFIER='(Trans_base) '
+++ export CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python enfr_latest_2teacher_train_distill_sample_CAB04061.py
+Design models with seed: 666666
+Load steacher model from: /home/yfguo/transformer_924/expm/dividedata/rs_3072/base_FT_enfr_bybase300k_low/std/eva_2.571_28.52.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/enfr_base_100k/std_20epochs/eva_2_2.630_2.645_29.63.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/base_FT_enfr_300k/std/eva_2.595_28.78.h5
+Init lr: 1e-05, Dev Loss/Error: 2.380 29.63
+Average loss over 10922631 tokens: 1.023, valid loss/error: 2.081 29.54
+New best model saved
+Average loss over 10912242 tokens: 1.018, valid loss/error: 1.889 29.48
+New best model saved
+Average loss over 10903525 tokens: 1.011, valid loss/error: 1.688 29.45
+New best model saved
+Average loss over 10935674 tokens: 1.007, valid loss/error: 1.556 29.45
+New best model saved
+Average loss over 10927192 tokens: 1.007, valid loss/error: 1.396 29.42
+New best model saved
+Average loss over 10898419 tokens: 1.004, valid loss/error: 1.242 29.38
+New best model saved
+Average loss over 10919645 tokens: 1.009, valid loss/error: 1.017 29.37
+New best model saved
+Average loss over 10909413 tokens: 1.004, valid loss/error: 0.860 29.39
+New best model saved
+Average loss over 10912747 tokens: 1.005, valid loss/error: 0.657 29.37
+New best model saved
+Average loss over 10926721 tokens: 0.997, valid loss/error: 0.584 29.39
+New best model saved
+Average loss over 10930853 tokens: 1.001, valid loss/error: 0.455 29.33
+New best model saved
+Average loss over 10922578 tokens: 0.997, valid loss/error: 0.445 29.37
+New best model saved
+Average loss over 10924595 tokens: 0.998, valid loss/error: 0.446 29.36
+Average loss over 10953441 tokens: 1.001, valid loss/error: 0.487 29.35
+Average loss over 10919643 tokens: 0.993, valid loss/error: 0.454 29.34
+Average loss over 10928755 tokens: 0.997, valid loss/error: 0.487 29.36
+Average loss over 10909990 tokens: 0.986, valid loss/error: 0.458 29.31
+New best model saved
+Average loss over 10929670 tokens: 0.986, valid loss/error: 0.444 29.32
+New best model saved
+Average loss over 10914681 tokens: 0.988, valid loss/error: 0.449 29.29
+New best model saved
+Average loss over 10911148 tokens: 0.991, valid loss/error: 0.531 29.30
+Average loss over 10928578 tokens: 0.994, valid loss/error: 0.443 29.30
+New best model saved
+Average loss over 10944320 tokens: 0.997, valid loss/error: 0.485 29.32
+Average loss over 10956653 tokens: 1.005, valid loss/error: 0.465 29.28
+New best model saved
+Average loss over 10934354 tokens: 0.992, valid loss/error: 0.460 29.33
+Average loss over 10922102 tokens: 0.991, valid loss/error: 0.501 29.28
+Average loss over 10927618 tokens: 0.987, valid loss/error: 0.440 29.30
+New best model saved
+Average loss over 10915702 tokens: 0.987, valid loss/error: 0.492 29.33
+Average loss over 10918736 tokens: 0.985, valid loss/error: 0.461 29.29
+Average loss over 10925325 tokens: 0.983, valid loss/error: 0.401 29.27
+New best model saved
+Average loss over 10926712 tokens: 0.994, valid loss/error: 0.485 29.29
+Average loss over 10930992 tokens: 0.982, valid loss/error: 0.462 29.30
+Average loss over 10914732 tokens: 0.987, valid loss/error: 0.491 29.28
+Average loss over 10930820 tokens: 0.987, valid loss/error: 0.436 29.28
+Average loss over 10931017 tokens: 0.988, valid loss/error: 0.522 29.26
+New best model saved
+Average loss over 10887027 tokens: 0.984, valid loss/error: 0.456 29.27
+Average loss over 10909935 tokens: 0.989, valid loss/error: 0.396 29.25
+New best model saved
+Average loss over 10915059 tokens: 0.990, valid loss/error: 0.432 29.22
+New best model saved
+Average loss over 10932874 tokens: 0.985, valid loss/error: 0.440 29.26
+Average loss over 10904063 tokens: 0.983, valid loss/error: 0.498 29.24
+Average loss over 10929757 tokens: 0.976, valid loss/error: 0.427 29.27
+Average loss over 10919318 tokens: 0.984, valid loss/error: 0.387 29.22
+New best model saved
+Average loss over 10911529 tokens: 0.982, valid loss/error: 0.423 29.26
+Average loss over 2702362 tokens: 0.991
+Epoch: 1, train loss: 0.994, valid loss/error: 0.443 29.22
+Average loss over 10915069 tokens: 0.984, valid loss/error: 0.459 29.23
+Average loss over 10919908 tokens: 0.984, valid loss/error: 0.311 29.22
+New best model saved
+Average loss over 10910541 tokens: 0.978, valid loss/error: 0.389 29.24
+Average loss over 10913219 tokens: 0.982, valid loss/error: 0.393 29.26
+Average loss over 10909479 tokens: 0.982, valid loss/error: 0.436 29.24
+Average loss over 10915739 tokens: 0.977, valid loss/error: 0.436 29.23
+Average loss over 10917230 tokens: 0.979, valid loss/error: 0.371 29.20
+New best model saved
+Average loss over 10943326 tokens: 0.979, valid loss/error: 0.372 29.25
+Average loss over 10925690 tokens: 0.979, valid loss/error: 0.365 29.24
+Average loss over 10941515 tokens: 0.984, valid loss/error: 0.442 29.25
+Average loss over 10917631 tokens: 0.980, valid loss/error: 0.376 29.25
+Average loss over 10926463 tokens: 0.972, valid loss/error: 0.408 29.24
+Average loss over 10896138 tokens: 0.980, valid loss/error: 0.392 29.20
+New best model saved
+Average loss over 10917844 tokens: 0.977, valid loss/error: 0.353 29.23
+Average loss over 10918215 tokens: 0.977, valid loss/error: 0.419 29.24
+Average loss over 10935570 tokens: 0.980, valid loss/error: 0.416 29.23
+Average loss over 10936462 tokens: 0.981, valid loss/error: 0.311 29.18
+New best model saved
+Average loss over 10892257 tokens: 0.963, valid loss/error: 0.334 29.20
+Average loss over 10907670 tokens: 0.976, valid loss/error: 0.390 29.19
+Average loss over 10918091 tokens: 0.981, valid loss/error: 0.385 29.21
+Average loss over 10890575 tokens: 0.971, valid loss/error: 0.372 29.23
+Average loss over 10936376 tokens: 0.980, valid loss/error: 0.428 29.21
+Average loss over 10908565 tokens: 0.975, valid loss/error: 0.376 29.22
+Average loss over 10916592 tokens: 0.979, valid loss/error: 0.373 29.20
+Average loss over 10906876 tokens: 0.973, valid loss/error: 0.347 29.21
+Average loss over 10926222 tokens: 0.970, valid loss/error: 0.426 29.21
+Average loss over 10920727 tokens: 0.973, valid loss/error: 0.366 29.22
+Average loss over 10921172 tokens: 0.968, valid loss/error: 0.472 29.19
+Average loss over 10909962 tokens: 0.978, valid loss/error: 0.380 29.17
+New best model saved
+Average loss over 10909993 tokens: 0.979, valid loss/error: 0.362 29.16
+New best model saved
+Average loss over 10946439 tokens: 0.978, valid loss/error: 0.372 29.19
+Average loss over 10915860 tokens: 0.977, valid loss/error: 0.436 29.20
+Average loss over 10931337 tokens: 0.975, valid loss/error: 0.348 29.18
+Average loss over 10926077 tokens: 0.982, valid loss/error: 0.316 29.20
+Average loss over 10934202 tokens: 0.985, valid loss/error: 0.384 29.18
+Average loss over 10935996 tokens: 0.976, valid loss/error: 0.379 29.17
+Average loss over 10932755 tokens: 0.983, valid loss/error: 0.350 29.19
+Average loss over 10919012 tokens: 0.971, valid loss/error: 0.348 29.18
+Traceback (most recent call last):
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 509, in <module>
+    terr, done_tokens, cur_checkid, remain_steps, _Dws = train(low_td,middle_td,high_td, tl, vd, nvalid, stu_optimizer, stu_lrsch, high_teach_model,teach_model,student_model, lossf,distilllossf,
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 113, in train
+    wd_add = ot.ne(pad_id).int().sum().item()
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
++ source /home/yfguo/scripts/init_conda.sh
++++ /home/yfguo/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /home/yfguo/miniconda3/bin/conda
+++++ dirname /home/yfguo/miniconda3/bin
++++ PATH=/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ /home/yfguo/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++++ eval 'PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++++ PS1='(base) '
+++++ export PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ export CONDA_PREFIX=/home/yfguo/miniconda3
+++++ CONDA_PREFIX=/home/yfguo/miniconda3
+++++ export CONDA_SHLVL=1
+++++ CONDA_SHLVL=1
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ conda activate Trans_base
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate Trans_base
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate Trans_base
+++ /home/yfguo/miniconda3/bin/conda shell.posix activate Trans_base
++ ask_conda='PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++ eval 'PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++ PS1='(Trans_base) '
+++ export PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ export CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ export CONDA_SHLVL=2
+++ CONDA_SHLVL=2
+++ export CONDA_DEFAULT_ENV=Trans_base
+++ CONDA_DEFAULT_ENV=Trans_base
+++ export 'CONDA_PROMPT_MODIFIER=(Trans_base) '
+++ CONDA_PROMPT_MODIFIER='(Trans_base) '
+++ export CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python enfr_latest_2teacher_train_distill_sample_CAB04061.py
+Design models with seed: 666666
+Load steacher model from: /home/yfguo/transformer_924/expm/dividedata/rs_3072/base_FT_enfr_bybase300k_low/std/eva_2.571_28.52.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/enfr_base_100k/std_20epochs/eva_2_2.630_2.645_29.63.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/base_FT_enfr_300k/std/eva_2.595_28.78.h5
+Init lr: 1e-05, Dev Loss/Error: 2.380 29.63
+Average loss over 10922631 tokens: 1.023, valid loss/error: 2.081 29.54
+New best model saved
+Average loss over 10912242 tokens: 1.018, valid loss/error: 1.889 29.48
+New best model saved
+Average loss over 10903525 tokens: 1.011, valid loss/error: 1.688 29.45
+New best model saved
+Average loss over 10935674 tokens: 1.007, valid loss/error: 1.556 29.45
+New best model saved
+Average loss over 10927192 tokens: 1.007, valid loss/error: 1.396 29.42
+New best model saved
+Average loss over 10898419 tokens: 1.004, valid loss/error: 1.242 29.38
+New best model saved
+Average loss over 10919645 tokens: 1.009, valid loss/error: 1.017 29.37
+New best model saved
+Average loss over 10909413 tokens: 1.004, valid loss/error: 0.860 29.39
+New best model saved
+Average loss over 10912747 tokens: 1.005, valid loss/error: 0.657 29.37
+New best model saved
+Average loss over 10926721 tokens: 0.997, valid loss/error: 0.584 29.39
+New best model saved
+Average loss over 10930853 tokens: 1.001, valid loss/error: 0.455 29.33
+New best model saved
+Average loss over 10922578 tokens: 0.997, valid loss/error: 0.445 29.37
+New best model saved
+Average loss over 10924595 tokens: 0.998, valid loss/error: 0.446 29.36
+Average loss over 10953441 tokens: 1.001, valid loss/error: 0.487 29.35
+Average loss over 10919643 tokens: 0.993, valid loss/error: 0.454 29.34
+Average loss over 10928755 tokens: 0.997, valid loss/error: 0.485 29.36
+Average loss over 10909990 tokens: 0.986, valid loss/error: 0.459 29.31
+New best model saved
+Average loss over 10929670 tokens: 0.986, valid loss/error: 0.443 29.32
+New best model saved
+Average loss over 10914681 tokens: 0.988, valid loss/error: 0.450 29.29
+New best model saved
+Average loss over 10911148 tokens: 0.991, valid loss/error: 0.530 29.30
+Average loss over 10928578 tokens: 0.994, valid loss/error: 0.443 29.31
+Average loss over 10944320 tokens: 0.997, valid loss/error: 0.483 29.32
+Average loss over 10956653 tokens: 1.005, valid loss/error: 0.465 29.28
+New best model saved
+Average loss over 10934354 tokens: 0.992, valid loss/error: 0.461 29.33
+Average loss over 10922102 tokens: 0.991, valid loss/error: 0.501 29.28
+Average loss over 10927618 tokens: 0.987, valid loss/error: 0.442 29.30
+New best model saved
+Average loss over 10915702 tokens: 0.987, valid loss/error: 0.493 29.33
+Average loss over 10918736 tokens: 0.985, valid loss/error: 0.462 29.29
+Average loss over 10925325 tokens: 0.983, valid loss/error: 0.403 29.27
+New best model saved
+Average loss over 10926712 tokens: 0.994, valid loss/error: 0.483 29.28
+Average loss over 10930992 tokens: 0.982, valid loss/error: 0.463 29.30
+Average loss over 10914732 tokens: 0.987, valid loss/error: 0.492 29.28
+Average loss over 10930820 tokens: 0.987, valid loss/error: 0.436 29.27
+Average loss over 10931017 tokens: 0.988, valid loss/error: 0.522 29.26
+New best model saved
+Average loss over 10887027 tokens: 0.984, valid loss/error: 0.455 29.27
+Average loss over 10909935 tokens: 0.989, valid loss/error: 0.393 29.26
+New best model saved
+Average loss over 10915059 tokens: 0.990, valid loss/error: 0.432 29.23
+New best model saved
+Average loss over 10932874 tokens: 0.985, valid loss/error: 0.441 29.27
+Average loss over 10904063 tokens: 0.983, valid loss/error: 0.497 29.24
+Average loss over 10929757 tokens: 0.976, valid loss/error: 0.428 29.26
+Average loss over 10919318 tokens: 0.984, valid loss/error: 0.383 29.22
+New best model saved
+Average loss over 10911529 tokens: 0.982, valid loss/error: 0.424 29.26
+Average loss over 2702362 tokens: 0.991
+Epoch: 1, train loss: 0.994, valid loss/error: 0.440 29.22
+New best model saved
+Average loss over 10915069 tokens: 0.984, valid loss/error: 0.459 29.23
+Average loss over 10919908 tokens: 0.984, valid loss/error: 0.312 29.24
+New best model saved
+Average loss over 10910541 tokens: 0.978, valid loss/error: 0.388 29.23
+Average loss over 10913219 tokens: 0.982, valid loss/error: 0.390 29.26
+Average loss over 10909479 tokens: 0.982, valid loss/error: 0.435 29.24
+Average loss over 10915739 tokens: 0.977, valid loss/error: 0.435 29.24
+Average loss over 10917230 tokens: 0.979, valid loss/error: 0.370 29.19
+New best model saved
+Average loss over 10943326 tokens: 0.979, valid loss/error: 0.372 29.24
+Average loss over 10925690 tokens: 0.979, valid loss/error: 0.364 29.24
+Average loss over 10941515 tokens: 0.984, valid loss/error: 0.442 29.26
+Average loss over 10917631 tokens: 0.980, valid loss/error: 0.375 29.26
+Average loss over 10926463 tokens: 0.972, valid loss/error: 0.408 29.23
+Average loss over 10896138 tokens: 0.980, valid loss/error: 0.392 29.20
+Average loss over 10917844 tokens: 0.977, valid loss/error: 0.354 29.22
+Average loss over 10918215 tokens: 0.977, valid loss/error: 0.420 29.23
+Average loss over 10935570 tokens: 0.980, valid loss/error: 0.413 29.24
+Average loss over 10936462 tokens: 0.981, valid loss/error: 0.310 29.19
+New best model saved
+Average loss over 10892257 tokens: 0.963, valid loss/error: 0.339 29.20
+Average loss over 10907670 tokens: 0.976, valid loss/error: 0.388 29.20
+Average loss over 10918091 tokens: 0.981, valid loss/error: 0.385 29.20
+Average loss over 10890575 tokens: 0.971, valid loss/error: 0.368 29.23
+Average loss over 10936376 tokens: 0.980, valid loss/error: 0.427 29.21
+Average loss over 10908565 tokens: 0.975, valid loss/error: 0.378 29.21
+Average loss over 10916592 tokens: 0.979, valid loss/error: 0.373 29.20
+Average loss over 10906876 tokens: 0.973, valid loss/error: 0.348 29.21
+Average loss over 10926222 tokens: 0.970, valid loss/error: 0.427 29.21
+Average loss over 10920727 tokens: 0.973, valid loss/error: 0.366 29.23
+Average loss over 10921172 tokens: 0.968, valid loss/error: 0.472 29.20
+Average loss over 10909962 tokens: 0.978, valid loss/error: 0.382 29.16
+New best model saved
+Average loss over 10909993 tokens: 0.979, valid loss/error: 0.361 29.16
+New best model saved
+Average loss over 10946439 tokens: 0.978, valid loss/error: 0.373 29.19
+Average loss over 10915860 tokens: 0.977, valid loss/error: 0.435 29.18
+Average loss over 10931337 tokens: 0.975, valid loss/error: 0.349 29.17
+Average loss over 10926077 tokens: 0.982, valid loss/error: 0.316 29.19
+Average loss over 10934202 tokens: 0.985, valid loss/error: 0.386 29.19
+Average loss over 10935996 tokens: 0.976, valid loss/error: 0.383 29.17
+Average loss over 10932755 tokens: 0.983, valid loss/error: 0.350 29.19
+Average loss over 10919012 tokens: 0.971, valid loss/error: 0.348 29.18
+Average loss over 10924230 tokens: 0.973, valid loss/error: 0.355 29.16
+Average loss over 10938007 tokens: 0.975, valid loss/error: 0.327 29.20
+Average loss over 10908018 tokens: 0.968, valid loss/error: 0.449 29.24
+Average loss over 10927313 tokens: 0.967, valid loss/error: 0.339 29.17
+Average loss over 2709010 tokens: 0.985
+Epoch: 2, train loss: 0.977, valid loss/error: 0.410 29.15
+New best model saved
+Average loss over 10906824 tokens: 0.967, valid loss/error: 0.340 29.17
+Average loss over 10931446 tokens: 0.972, valid loss/error: 0.306 29.18
+New best model saved
+Average loss over 10926454 tokens: 0.973, valid loss/error: 0.371 29.15
+Average loss over 10928786 tokens: 0.971, valid loss/error: 0.389 29.17
+Average loss over 10932819 tokens: 0.966, valid loss/error: 0.357 29.22
+Average loss over 10913180 tokens: 0.971, valid loss/error: 0.405 29.20
+Average loss over 10920168 tokens: 0.973, valid loss/error: 0.303 29.18
+New best model saved
+Average loss over 10881473 tokens: 0.963, valid loss/error: 0.302 29.16
+New best model saved
+Average loss over 10915107 tokens: 0.970, valid loss/error: 0.356 29.13
+New best model saved
+Average loss over 10937911 tokens: 0.972, valid loss/error: 0.339 29.12
+New best model saved
+Average loss over 10918480 tokens: 0.964, valid loss/error: 0.335 29.13
+Average loss over 10904888 tokens: 0.964, valid loss/error: 0.338 29.11
+New best model saved
+Average loss over 10934199 tokens: 0.970, valid loss/error: 0.354 29.13
+Average loss over 10929309 tokens: 0.972, valid loss/error: 0.377 29.14
+Average loss over 10922486 tokens: 0.970, valid loss/error: 0.317 29.15
+Average loss over 10928361 tokens: 0.969, valid loss/error: 0.314 29.12
+Average loss over 10926018 tokens: 0.973, valid loss/error: 0.345 29.12
+Average loss over 10918300 tokens: 0.969, valid loss/error: 0.428 29.13
+Average loss over 10944646 tokens: 0.971, valid loss/error: 0.325 29.16
+Average loss over 10931294 tokens: 0.968, valid loss/error: 0.322 29.16
+Average loss over 10901832 tokens: 0.966, valid loss/error: 0.317 29.11
+New best model saved
+Average loss over 10934579 tokens: 0.969, valid loss/error: 0.382 29.11
+New best model saved
+Average loss over 10927213 tokens: 0.970, valid loss/error: 0.289 29.09
+New best model saved
+Average loss over 10904522 tokens: 0.968, valid loss/error: 0.361 29.09
+New best model saved
+Average loss over 10926241 tokens: 0.966, valid loss/error: 0.398 29.09
+Average loss over 10942082 tokens: 0.963, valid loss/error: 0.420 29.10
+Average loss over 10933833 tokens: 0.978, valid loss/error: 0.322 29.09
+New best model saved
+Average loss over 10918447 tokens: 0.969, valid loss/error: 0.399 29.12
+Average loss over 10889689 tokens: 0.974, valid loss/error: 0.336 29.12
+Average loss over 10920811 tokens: 0.965, valid loss/error: 0.369 29.10
+Average loss over 10926092 tokens: 0.966, valid loss/error: 0.354 29.09
+Average loss over 10919109 tokens: 0.968, valid loss/error: 0.320 29.11
+Average loss over 10941766 tokens: 0.970, valid loss/error: 0.391 29.10
+Average loss over 10912336 tokens: 0.970, valid loss/error: 0.333 29.11
+Average loss over 10917563 tokens: 0.970, valid loss/error: 0.402 29.12
+Average loss over 10894860 tokens: 0.971, valid loss/error: 0.388 29.13
+Average loss over 10936767 tokens: 0.961, valid loss/error: 0.369 29.13
+Average loss over 10915276 tokens: 0.979, valid loss/error: 0.378 29.13
+Average loss over 10917798 tokens: 0.965, valid loss/error: 0.360 29.09
+Average loss over 10906830 tokens: 0.963, valid loss/error: 0.405 29.13
+Average loss over 10921435 tokens: 0.971, valid loss/error: 0.304 29.14
+Average loss over 10892853 tokens: 0.972, valid loss/error: 0.335 29.13
+Average loss over 2700218 tokens: 0.978
+Epoch: 3, train loss: 0.969, valid loss/error: 0.349 29.11
+Average loss over 10895514 tokens: 0.963, valid loss/error: 0.341 29.13
+Average loss over 10909372 tokens: 0.962, valid loss/error: 0.385 29.11
+Average loss over 10911524 tokens: 0.961, valid loss/error: 0.344 29.11
+Average loss over 10934113 tokens: 0.965, valid loss/error: 0.355 29.11
+Average loss over 10924149 tokens: 0.963, valid loss/error: 0.301 29.12
+Average loss over 10918475 tokens: 0.962, valid loss/error: 0.273 29.11
+New best model saved
+Average loss over 10910378 tokens: 0.967, valid loss/error: 0.388 29.12
+Average loss over 10920755 tokens: 0.968, valid loss/error: 0.399 29.12
+Average loss over 10917882 tokens: 0.967, valid loss/error: 0.398 29.11
+Average loss over 10955502 tokens: 0.960, valid loss/error: 0.325 29.08
+New best model saved
+Average loss over 10940791 tokens: 0.969, valid loss/error: 0.474 29.09
+Average loss over 10928687 tokens: 0.969, valid loss/error: 0.289 29.09
+Average loss over 10899147 tokens: 0.963, valid loss/error: 0.329 29.08
+Average loss over 10930531 tokens: 0.959, valid loss/error: 0.326 29.11
+Average loss over 10919011 tokens: 0.972, valid loss/error: 0.328 29.10
+Average loss over 10923968 tokens: 0.973, valid loss/error: 0.326 29.12
+Average loss over 10921735 tokens: 0.969, valid loss/error: 0.365 29.12
+Average loss over 10918856 tokens: 0.964, valid loss/error: 0.319 29.07
+New best model saved
+Average loss over 10925111 tokens: 0.968, valid loss/error: 0.309 29.11
+Average loss over 10913723 tokens: 0.970, valid loss/error: 0.332 29.09
+Average loss over 10923276 tokens: 0.962, valid loss/error: 0.368 29.12
+Average loss over 10926618 tokens: 0.959, valid loss/error: 0.295 29.07
+Average loss over 10934139 tokens: 0.970, valid loss/error: 0.409 29.10
+Average loss over 10930522 tokens: 0.963, valid loss/error: 0.269 29.14
+New best model saved
+Average loss over 10946757 tokens: 0.967, valid loss/error: 0.301 29.11
+Average loss over 10918640 tokens: 0.965, valid loss/error: 0.380 29.14
+Average loss over 10891593 tokens: 0.964, valid loss/error: 0.272 29.12
+Average loss over 10932016 tokens: 0.966, valid loss/error: 0.432 29.06
+New best model saved
+Average loss over 10914060 tokens: 0.970, valid loss/error: 0.317 29.08
+Average loss over 10912602 tokens: 0.964, valid loss/error: 0.324 29.09
+Average loss over 10911417 tokens: 0.957, valid loss/error: 0.447 29.09
+Average loss over 10907015 tokens: 0.956, valid loss/error: 0.312 29.09
+Average loss over 10940659 tokens: 0.970, valid loss/error: 0.289 29.11
+Average loss over 10906627 tokens: 0.959, valid loss/error: 0.308 29.13
+Average loss over 10931541 tokens: 0.973, valid loss/error: 0.351 29.09
+Average loss over 10917076 tokens: 0.960, valid loss/error: 0.361 29.09
+Average loss over 10921957 tokens: 0.963, valid loss/error: 0.281 29.07
+Average loss over 10945756 tokens: 0.965, valid loss/error: 0.241 29.08
+New best model saved
+Average loss over 10929291 tokens: 0.963, valid loss/error: 0.308 29.09
+Average loss over 10931930 tokens: 0.969, valid loss/error: 0.320 29.07
+Average loss over 10932752 tokens: 0.969, valid loss/error: 0.315 29.04
+New best model saved
+Average loss over 10917796 tokens: 0.957, valid loss/error: 0.344 29.07
+Average loss over 2705815 tokens: 0.957
+Epoch: 4, train loss: 0.965, valid loss/error: 0.361 29.07
+Average loss over 10937179 tokens: 0.954, valid loss/error: 0.284 29.07
+Average loss over 10914313 tokens: 0.958, valid loss/error: 0.322 29.07
+Average loss over 10907360 tokens: 0.959, valid loss/error: 0.380 29.07
+Average loss over 10937424 tokens: 0.962, valid loss/error: 0.302 29.03
+New best model saved
+Average loss over 10916824 tokens: 0.955, valid loss/error: 0.337 29.04
+Average loss over 10896915 tokens: 0.969, valid loss/error: 0.255 29.04
+Average loss over 10902034 tokens: 0.955, valid loss/error: 0.315 29.04
+Average loss over 10913654 tokens: 0.958, valid loss/error: 0.286 29.03
+Average loss over 10943427 tokens: 0.962, valid loss/error: 0.427 29.04
+Average loss over 10927899 tokens: 0.956, valid loss/error: 0.383 29.04
+Average loss over 10922682 tokens: 0.960, valid loss/error: 0.337 29.03
+Average loss over 10920764 tokens: 0.953, valid loss/error: 0.311 29.05
+Average loss over 10927034 tokens: 0.965, valid loss/error: 0.365 29.09
+Average loss over 10917482 tokens: 0.966, valid loss/error: 0.334 29.02
+New best model saved
+Average loss over 10943534 tokens: 0.967, valid loss/error: 0.313 29.01
+New best model saved
+Average loss over 10897541 tokens: 0.965, valid loss/error: 0.337 29.07
+Average loss over 10947550 tokens: 0.966, valid loss/error: 0.325 29.05
+Average loss over 10925915 tokens: 0.962, valid loss/error: 0.304 29.02
+Average loss over 10944200 tokens: 0.963, valid loss/error: 0.371 29.03
+Average loss over 10908055 tokens: 0.968, valid loss/error: 0.377 29.01
+New best model saved
+Average loss over 10940267 tokens: 0.970, valid loss/error: 0.281 29.01
+Average loss over 10925280 tokens: 0.957, valid loss/error: 0.329 29.04
+Average loss over 10931074 tokens: 0.958, valid loss/error: 0.405 29.05
+Average loss over 10919765 tokens: 0.952, valid loss/error: 0.402 29.00
+New best model saved
+Average loss over 10912803 tokens: 0.955, valid loss/error: 0.335 29.02
+Average loss over 10942562 tokens: 0.963, valid loss/error: 0.382 29.04
+Average loss over 10916229 tokens: 0.958, valid loss/error: 0.348 29.04
+Average loss over 10929402 tokens: 0.960, valid loss/error: 0.325 29.03
+Average loss over 10926685 tokens: 0.958, valid loss/error: 0.252 29.07
+Average loss over 10920187 tokens: 0.956, valid loss/error: 0.290 29.02
+Average loss over 10928393 tokens: 0.963, valid loss/error: 0.299 29.00
+New best model saved
+Average loss over 10928544 tokens: 0.959, valid loss/error: 0.300 28.99
+New best model saved
+Average loss over 10913736 tokens: 0.952, valid loss/error: 0.287 29.05
+Average loss over 10891747 tokens: 0.954, valid loss/error: 0.307 29.02
+Average loss over 10926157 tokens: 0.954, valid loss/error: 0.300 29.03
+Average loss over 10908056 tokens: 0.963, valid loss/error: 0.325 29.04
+Average loss over 10917577 tokens: 0.956, valid loss/error: 0.397 29.04
+Average loss over 10891118 tokens: 0.963, valid loss/error: 0.319 29.06
+Average loss over 10906396 tokens: 0.962, valid loss/error: 0.343 29.07
+Average loss over 10907203 tokens: 0.962, valid loss/error: 0.359 29.05
+Average loss over 10919766 tokens: 0.958, valid loss/error: 0.257 29.05
+Average loss over 10917843 tokens: 0.958, valid loss/error: 0.392 29.00
+Average loss over 2703475 tokens: 0.948
+Epoch: 5, train loss: 0.960, valid loss/error: 0.275 29.01
+Average loss over 10911567 tokens: 0.955, valid loss/error: 0.298 29.01
+Average loss over 10926143 tokens: 0.963, valid loss/error: 0.324 29.01
+Average loss over 10905927 tokens: 0.952, valid loss/error: 0.357 29.02
+Average loss over 10933609 tokens: 0.957, valid loss/error: 0.293 29.03
+Average loss over 10916365 tokens: 0.961, valid loss/error: 0.275 29.02
+Average loss over 10901564 tokens: 0.945, valid loss/error: 0.323 29.01
+Average loss over 10931086 tokens: 0.957, valid loss/error: 0.275 29.02
+Average loss over 10931864 tokens: 0.960, valid loss/error: 0.298 29.00
+Average loss over 10929275 tokens: 0.956, valid loss/error: 0.264 29.01
+Traceback (most recent call last):
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 509, in <module>
+    terr, done_tokens, cur_checkid, remain_steps, _Dws = train(low_td,middle_td,high_td, tl, vd, nvalid, stu_optimizer, stu_lrsch, high_teach_model,teach_model,student_model, lossf,distilllossf,
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 97, in train
+    high_teach_out_softmax_withoutT, high_teach_out_sotfmax_byT, high_teach_out = high_teach_model(seq_batch, oi)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/distill_NMT.py", line 56, in forward
+    return self.dec(self.enc(inpute, _mask), inputo, _mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/distill_Decoder.py", line 196, in forward
+    out = net(inpute, out, src_pad_mask, _mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/transformer/distill_Decoder.py", line 53, in forward
+    context = self.cross_attn(context, inpute, mask=src_pad_mask)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/modules/base.py", line 945, in forward
+    outs = self.net(_iQ, iK, *inputs, **kwargs)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/modules/base.py", line 639, in forward
+    real_iQ = self.query_adaptor(iQ).view(bsize, nquery, nheads, adim).transpose(1, 2)
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1603, in __getattr__
+    _parameters = self.__dict__['_parameters']
+KeyError: None
++ source /home/yfguo/scripts/init_conda.sh
++++ /home/yfguo/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /home/yfguo/miniconda3/bin/conda
+++++ dirname /home/yfguo/miniconda3/bin
++++ PATH=/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ /home/yfguo/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++++ eval 'PS1='\''(base) '\''
+export PATH='\''/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++++ PS1='(base) '
+++++ export PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ PATH=/home/yfguo/miniconda3/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++++ export CONDA_PREFIX=/home/yfguo/miniconda3
+++++ CONDA_PREFIX=/home/yfguo/miniconda3
+++++ export CONDA_SHLVL=1
+++++ CONDA_SHLVL=1
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ conda activate Trans_base
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate Trans_base
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate Trans_base
+++ /home/yfguo/miniconda3/bin/conda shell.posix activate Trans_base
++ ask_conda='PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
++ eval 'PS1='\''(Trans_base) '\''
+export PATH='\''/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'\''
+export CONDA_PREFIX='\''/home/yfguo/miniconda3/envs/Trans_base'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''Trans_base'\''
+export CONDA_PROMPT_MODIFIER='\''(Trans_base) '\''
+export CONDA_PREFIX_1='\''/home/yfguo/miniconda3'\''
+export CONDA_EXE='\''/home/yfguo/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/home/yfguo/miniconda3/bin/python'\'''
+++ PS1='(Trans_base) '
+++ export PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ PATH=/home/yfguo/miniconda3/envs/Trans_base/bin:/home/yfguo/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ export CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ CONDA_PREFIX=/home/yfguo/miniconda3/envs/Trans_base
+++ export CONDA_SHLVL=2
+++ CONDA_SHLVL=2
+++ export CONDA_DEFAULT_ENV=Trans_base
+++ CONDA_DEFAULT_ENV=Trans_base
+++ export 'CONDA_PROMPT_MODIFIER=(Trans_base) '
+++ CONDA_PROMPT_MODIFIER='(Trans_base) '
+++ export CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ CONDA_PREFIX_1=/home/yfguo/miniconda3
+++ export CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ CONDA_EXE=/home/yfguo/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/home/yfguo/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ python enfr_latest_2teacher_train_distill_sample_CAB04061.py
+Design models with seed: 666666
+Load steacher model from: /home/yfguo/transformer_924/expm/dividedata/rs_3072/base_FT_enfr_bybase300k_low/std/eva_2.571_28.52.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/enfr_base_100k/std_20epochs/eva_2_2.630_2.645_29.63.h5
+load student model from: /home/yfguo/transformer_924/expm/data/rs_6144_2/base_FT_enfr_300k/std/eva_2.595_28.78.h5
+Init lr: 1e-05, Dev Loss/Error: 2.380 29.63
+Average loss over 10922631 tokens: 1.023, valid loss/error: 2.081 29.54
+New best model saved
+Average loss over 10912242 tokens: 1.018, valid loss/error: 1.889 29.48
+New best model saved
+Average loss over 10903525 tokens: 1.011, valid loss/error: 1.688 29.45
+New best model saved
+Average loss over 10935674 tokens: 1.007, valid loss/error: 1.556 29.45
+New best model saved
+Average loss over 10927192 tokens: 1.007, valid loss/error: 1.396 29.42
+New best model saved
+Average loss over 10898419 tokens: 1.004, valid loss/error: 1.242 29.38
+New best model saved
+Average loss over 10919645 tokens: 1.009, valid loss/error: 1.017 29.37
+New best model saved
+Average loss over 10909413 tokens: 1.004, valid loss/error: 0.860 29.39
+New best model saved
+Average loss over 10912747 tokens: 1.005, valid loss/error: 0.657 29.37
+New best model saved
+Average loss over 10926721 tokens: 0.997, valid loss/error: 0.584 29.39
+New best model saved
+Average loss over 10930853 tokens: 1.001, valid loss/error: 0.455 29.33
+New best model saved
+Average loss over 10922578 tokens: 0.997, valid loss/error: 0.445 29.37
+New best model saved
+Average loss over 10924595 tokens: 0.998, valid loss/error: 0.446 29.36
+Average loss over 10953441 tokens: 1.001, valid loss/error: 0.487 29.35
+Average loss over 10919643 tokens: 0.993, valid loss/error: 0.454 29.34
+Average loss over 10928755 tokens: 0.997, valid loss/error: 0.485 29.36
+Average loss over 10909990 tokens: 0.986, valid loss/error: 0.459 29.31
+New best model saved
+Average loss over 10929670 tokens: 0.986, valid loss/error: 0.443 29.32
+New best model saved
+Average loss over 10914681 tokens: 0.988, valid loss/error: 0.450 29.29
+New best model saved
+Average loss over 10911148 tokens: 0.991, valid loss/error: 0.530 29.30
+Average loss over 10928578 tokens: 0.994, valid loss/error: 0.443 29.31
+Average loss over 10944320 tokens: 0.997, valid loss/error: 0.483 29.32
+Average loss over 10956653 tokens: 1.005, valid loss/error: 0.465 29.28
+New best model saved
+Average loss over 10934354 tokens: 0.992, valid loss/error: 0.461 29.33
+Average loss over 10922102 tokens: 0.991, valid loss/error: 0.501 29.28
+Average loss over 10927618 tokens: 0.987, valid loss/error: 0.442 29.30
+New best model saved
+Average loss over 10915702 tokens: 0.987, valid loss/error: 0.493 29.33
+Average loss over 10918736 tokens: 0.985, valid loss/error: 0.462 29.29
+Average loss over 10925325 tokens: 0.983, valid loss/error: 0.403 29.27
+New best model saved
+Average loss over 10926712 tokens: 0.994, valid loss/error: 0.483 29.28
+Average loss over 10930992 tokens: 0.982, valid loss/error: 0.463 29.30
+Average loss over 10914732 tokens: 0.987, valid loss/error: 0.492 29.28
+Average loss over 10930820 tokens: 0.987, valid loss/error: 0.436 29.27
+Average loss over 10931017 tokens: 0.988, valid loss/error: 0.522 29.26
+New best model saved
+Average loss over 10887027 tokens: 0.984, valid loss/error: 0.455 29.27
+Average loss over 10909935 tokens: 0.989, valid loss/error: 0.393 29.26
+New best model saved
+Average loss over 10915059 tokens: 0.990, valid loss/error: 0.432 29.23
+New best model saved
+Average loss over 10932874 tokens: 0.985, valid loss/error: 0.441 29.27
+Average loss over 10904063 tokens: 0.983, valid loss/error: 0.497 29.24
+Average loss over 10929757 tokens: 0.976, valid loss/error: 0.428 29.26
+Average loss over 10919318 tokens: 0.984, valid loss/error: 0.383 29.22
+New best model saved
+Average loss over 10911529 tokens: 0.982, valid loss/error: 0.424 29.26
+Average loss over 2702362 tokens: 0.991
+Epoch: 1, train loss: 0.994, valid loss/error: 0.440 29.22
+New best model saved
+Average loss over 10915069 tokens: 0.984, valid loss/error: 0.459 29.23
+Average loss over 10919908 tokens: 0.984, valid loss/error: 0.312 29.24
+New best model saved
+Average loss over 10910541 tokens: 0.978, valid loss/error: 0.388 29.23
+Average loss over 10913219 tokens: 0.982, valid loss/error: 0.390 29.26
+Average loss over 10909479 tokens: 0.982, valid loss/error: 0.435 29.24
+Average loss over 10915739 tokens: 0.977, valid loss/error: 0.435 29.24
+Average loss over 10917230 tokens: 0.979, valid loss/error: 0.370 29.19
+New best model saved
+Average loss over 10943326 tokens: 0.979, valid loss/error: 0.372 29.24
+Average loss over 10925690 tokens: 0.979, valid loss/error: 0.364 29.24
+Average loss over 10941515 tokens: 0.984, valid loss/error: 0.442 29.26
+Average loss over 10917631 tokens: 0.980, valid loss/error: 0.375 29.26
+Average loss over 10926463 tokens: 0.972, valid loss/error: 0.408 29.23
+Average loss over 10896138 tokens: 0.980, valid loss/error: 0.392 29.20
+Average loss over 10917844 tokens: 0.977, valid loss/error: 0.354 29.22
+Average loss over 10918215 tokens: 0.977, valid loss/error: 0.420 29.23
+Average loss over 10935570 tokens: 0.980, valid loss/error: 0.413 29.24
+Average loss over 10936462 tokens: 0.981, valid loss/error: 0.310 29.19
+New best model saved
+Average loss over 10892257 tokens: 0.963, valid loss/error: 0.339 29.20
+Average loss over 10907670 tokens: 0.976, valid loss/error: 0.388 29.20
+Average loss over 10918091 tokens: 0.981, valid loss/error: 0.385 29.20
+Average loss over 10890575 tokens: 0.971, valid loss/error: 0.368 29.23
+Average loss over 10936376 tokens: 0.980, valid loss/error: 0.427 29.21
+Average loss over 10908565 tokens: 0.975, valid loss/error: 0.378 29.21
+Average loss over 10916592 tokens: 0.979, valid loss/error: 0.373 29.20
+Average loss over 10906876 tokens: 0.973, valid loss/error: 0.348 29.21
+Average loss over 10926222 tokens: 0.970, valid loss/error: 0.427 29.21
+Average loss over 10920727 tokens: 0.973, valid loss/error: 0.366 29.23
+Average loss over 10921172 tokens: 0.968, valid loss/error: 0.472 29.20
+Average loss over 10909962 tokens: 0.978, valid loss/error: 0.382 29.16
+New best model saved
+Average loss over 10909993 tokens: 0.979, valid loss/error: 0.361 29.16
+New best model saved
+Average loss over 10946439 tokens: 0.978, valid loss/error: 0.373 29.19
+Average loss over 10915860 tokens: 0.977, valid loss/error: 0.435 29.18
+Average loss over 10931337 tokens: 0.975, valid loss/error: 0.349 29.17
+Average loss over 10926077 tokens: 0.982, valid loss/error: 0.316 29.19
+Average loss over 10934202 tokens: 0.985, valid loss/error: 0.386 29.19
+Average loss over 10935996 tokens: 0.976, valid loss/error: 0.383 29.17
+Average loss over 10932755 tokens: 0.983, valid loss/error: 0.350 29.19
+Average loss over 10919012 tokens: 0.971, valid loss/error: 0.348 29.18
+Average loss over 10924230 tokens: 0.973, valid loss/error: 0.355 29.16
+Average loss over 10938007 tokens: 0.975, valid loss/error: 0.327 29.20
+Average loss over 10908018 tokens: 0.968, valid loss/error: 0.449 29.24
+Average loss over 10927313 tokens: 0.967, valid loss/error: 0.339 29.17
+Average loss over 2709010 tokens: 0.985
+Epoch: 2, train loss: 0.977, valid loss/error: 0.410 29.15
+New best model saved
+Average loss over 10906824 tokens: 0.967, valid loss/error: 0.340 29.17
+Average loss over 10931446 tokens: 0.972, valid loss/error: 0.306 29.18
+New best model saved
+Average loss over 10926454 tokens: 0.973, valid loss/error: 0.371 29.15
+Average loss over 10928786 tokens: 0.971, valid loss/error: 0.389 29.17
+Average loss over 10932819 tokens: 0.966, valid loss/error: 0.357 29.22
+Average loss over 10913180 tokens: 0.971, valid loss/error: 0.405 29.20
+Average loss over 10920168 tokens: 0.973, valid loss/error: 0.303 29.18
+New best model saved
+Average loss over 10881473 tokens: 0.963, valid loss/error: 0.302 29.16
+New best model saved
+Average loss over 10915107 tokens: 0.970, valid loss/error: 0.356 29.13
+New best model saved
+Average loss over 10937911 tokens: 0.972, valid loss/error: 0.339 29.12
+New best model saved
+Average loss over 10918480 tokens: 0.964, valid loss/error: 0.335 29.13
+Average loss over 10904888 tokens: 0.964, valid loss/error: 0.338 29.11
+New best model saved
+Average loss over 10934199 tokens: 0.970, valid loss/error: 0.354 29.13
+Average loss over 10929309 tokens: 0.972, valid loss/error: 0.377 29.14
+Average loss over 10922486 tokens: 0.970, valid loss/error: 0.317 29.15
+Average loss over 10928361 tokens: 0.969, valid loss/error: 0.314 29.12
+Average loss over 10926018 tokens: 0.973, valid loss/error: 0.345 29.12
+Average loss over 10918300 tokens: 0.969, valid loss/error: 0.428 29.13
+Average loss over 10944646 tokens: 0.971, valid loss/error: 0.325 29.16
+Average loss over 10931294 tokens: 0.968, valid loss/error: 0.322 29.16
+Average loss over 10901832 tokens: 0.966, valid loss/error: 0.317 29.11
+New best model saved
+Average loss over 10934579 tokens: 0.969, valid loss/error: 0.382 29.11
+New best model saved
+Average loss over 10927213 tokens: 0.970, valid loss/error: 0.289 29.09
+New best model saved
+Average loss over 10904522 tokens: 0.968, valid loss/error: 0.361 29.09
+New best model saved
+Average loss over 10926241 tokens: 0.966, valid loss/error: 0.398 29.09
+Average loss over 10942082 tokens: 0.963, valid loss/error: 0.420 29.10
+Average loss over 10933833 tokens: 0.978, valid loss/error: 0.322 29.09
+New best model saved
+Average loss over 10918447 tokens: 0.969, valid loss/error: 0.399 29.12
+Average loss over 10889689 tokens: 0.974, valid loss/error: 0.336 29.12
+Average loss over 10920811 tokens: 0.965, valid loss/error: 0.369 29.10
+Average loss over 10926092 tokens: 0.966, valid loss/error: 0.354 29.09
+Average loss over 10919109 tokens: 0.968, valid loss/error: 0.320 29.11
+Average loss over 10941766 tokens: 0.970, valid loss/error: 0.391 29.10
+Average loss over 10912336 tokens: 0.970, valid loss/error: 0.333 29.11
+Average loss over 10917563 tokens: 0.970, valid loss/error: 0.402 29.12
+Average loss over 10894860 tokens: 0.971, valid loss/error: 0.388 29.13
+Average loss over 10936767 tokens: 0.961, valid loss/error: 0.369 29.13
+Average loss over 10915276 tokens: 0.979, valid loss/error: 0.378 29.13
+Average loss over 10917798 tokens: 0.965, valid loss/error: 0.360 29.09
+Average loss over 10906830 tokens: 0.963, valid loss/error: 0.405 29.13
+Average loss over 10921435 tokens: 0.971, valid loss/error: 0.304 29.14
+Average loss over 10892853 tokens: 0.972, valid loss/error: 0.335 29.13
+Average loss over 2700218 tokens: 0.978
+Epoch: 3, train loss: 0.969, valid loss/error: 0.349 29.11
+Average loss over 10895514 tokens: 0.963, valid loss/error: 0.341 29.13
+Average loss over 10909372 tokens: 0.962, valid loss/error: 0.385 29.11
+Average loss over 10911524 tokens: 0.961, valid loss/error: 0.344 29.11
+Average loss over 10934113 tokens: 0.965, valid loss/error: 0.355 29.11
+Average loss over 10924149 tokens: 0.963, valid loss/error: 0.301 29.12
+Average loss over 10918475 tokens: 0.962, valid loss/error: 0.273 29.11
+New best model saved
+Average loss over 10910378 tokens: 0.967, valid loss/error: 0.388 29.12
+Average loss over 10920755 tokens: 0.968, valid loss/error: 0.399 29.12
+Average loss over 10917882 tokens: 0.967, valid loss/error: 0.398 29.11
+Average loss over 10955502 tokens: 0.960, valid loss/error: 0.325 29.08
+New best model saved
+Average loss over 10940791 tokens: 0.969, valid loss/error: 0.474 29.09
+Average loss over 10928687 tokens: 0.969, valid loss/error: 0.289 29.09
+Average loss over 10899147 tokens: 0.963, valid loss/error: 0.329 29.08
+Average loss over 10930531 tokens: 0.959, valid loss/error: 0.326 29.11
+Average loss over 10919011 tokens: 0.972, valid loss/error: 0.328 29.10
+Average loss over 10923968 tokens: 0.973, valid loss/error: 0.326 29.12
+Average loss over 10921735 tokens: 0.969, valid loss/error: 0.365 29.12
+Average loss over 10918856 tokens: 0.964, valid loss/error: 0.319 29.07
+New best model saved
+Average loss over 10925111 tokens: 0.968, valid loss/error: 0.309 29.11
+Average loss over 10913723 tokens: 0.970, valid loss/error: 0.332 29.09
+Average loss over 10923276 tokens: 0.962, valid loss/error: 0.368 29.12
+Average loss over 10926618 tokens: 0.959, valid loss/error: 0.295 29.07
+Average loss over 10934139 tokens: 0.970, valid loss/error: 0.409 29.10
+Average loss over 10930522 tokens: 0.963, valid loss/error: 0.269 29.14
+New best model saved
+Average loss over 10946757 tokens: 0.967, valid loss/error: 0.301 29.11
+Average loss over 10918640 tokens: 0.965, valid loss/error: 0.380 29.14
+Average loss over 10891593 tokens: 0.964, valid loss/error: 0.272 29.12
+Average loss over 10932016 tokens: 0.966, valid loss/error: 0.432 29.06
+New best model saved
+Average loss over 10914060 tokens: 0.970, valid loss/error: 0.317 29.08
+Average loss over 10912602 tokens: 0.964, valid loss/error: 0.324 29.09
+Average loss over 10911417 tokens: 0.957, valid loss/error: 0.447 29.09
+Average loss over 10907015 tokens: 0.956, valid loss/error: 0.312 29.09
+Average loss over 10940659 tokens: 0.970, valid loss/error: 0.289 29.11
+Average loss over 10906627 tokens: 0.959, valid loss/error: 0.308 29.13
+Average loss over 10931541 tokens: 0.973, valid loss/error: 0.351 29.09
+Average loss over 10917076 tokens: 0.960, valid loss/error: 0.361 29.09
+Average loss over 10921957 tokens: 0.963, valid loss/error: 0.281 29.07
+Average loss over 10945756 tokens: 0.965, valid loss/error: 0.241 29.08
+New best model saved
+Average loss over 10929291 tokens: 0.963, valid loss/error: 0.308 29.09
+Average loss over 10931930 tokens: 0.969, valid loss/error: 0.320 29.07
+Average loss over 10932752 tokens: 0.969, valid loss/error: 0.315 29.04
+New best model saved
+Average loss over 10917796 tokens: 0.957, valid loss/error: 0.344 29.07
+Average loss over 2705815 tokens: 0.957
+Epoch: 4, train loss: 0.965, valid loss/error: 0.361 29.07
+Average loss over 10937179 tokens: 0.954, valid loss/error: 0.284 29.07
+Average loss over 10914313 tokens: 0.958, valid loss/error: 0.322 29.07
+Average loss over 10907360 tokens: 0.959, valid loss/error: 0.380 29.07
+Average loss over 10937424 tokens: 0.962, valid loss/error: 0.302 29.03
+New best model saved
+Average loss over 10916824 tokens: 0.955, valid loss/error: 0.337 29.04
+Average loss over 10896915 tokens: 0.969, valid loss/error: 0.255 29.04
+Average loss over 10902034 tokens: 0.955, valid loss/error: 0.315 29.04
+Average loss over 10913654 tokens: 0.958, valid loss/error: 0.286 29.03
+Average loss over 10943427 tokens: 0.962, valid loss/error: 0.427 29.04
+Average loss over 10927899 tokens: 0.956, valid loss/error: 0.383 29.04
+Average loss over 10922682 tokens: 0.960, valid loss/error: 0.337 29.03
+Average loss over 10920764 tokens: 0.953, valid loss/error: 0.311 29.05
+Average loss over 10927034 tokens: 0.965, valid loss/error: 0.365 29.09
+Average loss over 10917482 tokens: 0.966, valid loss/error: 0.334 29.02
+New best model saved
+Average loss over 10943534 tokens: 0.967, valid loss/error: 0.313 29.01
+New best model saved
+Average loss over 10897541 tokens: 0.965, valid loss/error: 0.337 29.07
+Average loss over 10947550 tokens: 0.966, valid loss/error: 0.325 29.05
+Average loss over 10925915 tokens: 0.962, valid loss/error: 0.304 29.02
+Average loss over 10944200 tokens: 0.963, valid loss/error: 0.371 29.03
+Average loss over 10908055 tokens: 0.968, valid loss/error: 0.377 29.01
+New best model saved
+Average loss over 10940267 tokens: 0.970, valid loss/error: 0.281 29.01
+Average loss over 10925280 tokens: 0.957, valid loss/error: 0.329 29.04
+Average loss over 10931074 tokens: 0.958, valid loss/error: 0.405 29.05
+Average loss over 10919765 tokens: 0.952, valid loss/error: 0.402 29.00
+New best model saved
+Average loss over 10912803 tokens: 0.955, valid loss/error: 0.335 29.02
+Average loss over 10942562 tokens: 0.963, valid loss/error: 0.382 29.04
+Average loss over 10916229 tokens: 0.958, valid loss/error: 0.348 29.04
+Average loss over 10929402 tokens: 0.960, valid loss/error: 0.325 29.03
+Average loss over 10926685 tokens: 0.958, valid loss/error: 0.252 29.07
+Average loss over 10920187 tokens: 0.956, valid loss/error: 0.290 29.02
+Average loss over 10928393 tokens: 0.963, valid loss/error: 0.299 29.00
+New best model saved
+Average loss over 10928544 tokens: 0.959, valid loss/error: 0.300 28.99
+New best model saved
+Average loss over 10913736 tokens: 0.952, valid loss/error: 0.287 29.05
+Average loss over 10891747 tokens: 0.954, valid loss/error: 0.307 29.02
+Average loss over 10926157 tokens: 0.954, valid loss/error: 0.300 29.03
+Average loss over 10908056 tokens: 0.963, valid loss/error: 0.325 29.04
+Average loss over 10917577 tokens: 0.956, valid loss/error: 0.397 29.04
+Average loss over 10891118 tokens: 0.963, valid loss/error: 0.319 29.06
+Average loss over 10906396 tokens: 0.962, valid loss/error: 0.343 29.07
+Average loss over 10907203 tokens: 0.962, valid loss/error: 0.359 29.05
+Average loss over 10919766 tokens: 0.958, valid loss/error: 0.257 29.05
+Average loss over 10917843 tokens: 0.958, valid loss/error: 0.392 29.00
+Average loss over 2703475 tokens: 0.948
+Epoch: 5, train loss: 0.960, valid loss/error: 0.275 29.01
+Average loss over 10911567 tokens: 0.955, valid loss/error: 0.298 29.01
+Average loss over 10926143 tokens: 0.963, valid loss/error: 0.324 29.01
+Average loss over 10905927 tokens: 0.952, valid loss/error: 0.357 29.02
+Average loss over 10933609 tokens: 0.957, valid loss/error: 0.293 29.03
+Average loss over 10916365 tokens: 0.961, valid loss/error: 0.275 29.02
+Average loss over 10901564 tokens: 0.945, valid loss/error: 0.323 29.01
+Average loss over 10931086 tokens: 0.957, valid loss/error: 0.275 29.02
+Average loss over 10931864 tokens: 0.960, valid loss/error: 0.298 29.00
+Average loss over 10929275 tokens: 0.956, valid loss/error: 0.264 29.01
+Average loss over 10913579 tokens: 0.958, valid loss/error: 0.286 29.02
+Average loss over 10904225 tokens: 0.956, valid loss/error: 0.234 29.02
+New best model saved
+Average loss over 10895689 tokens: 0.956, valid loss/error: 0.324 29.00
+Average loss over 10920722 tokens: 0.950, valid loss/error: 0.244 29.01
+Average loss over 10923866 tokens: 0.963, valid loss/error: 0.255 28.99
+New best model saved
+Average loss over 10936889 tokens: 0.962, valid loss/error: 0.308 28.99
+Average loss over 10920554 tokens: 0.960, valid loss/error: 0.324 29.01
+Average loss over 10901240 tokens: 0.951, valid loss/error: 0.275 29.03
+Average loss over 10922570 tokens: 0.962, valid loss/error: 0.319 29.01
+Average loss over 10935406 tokens: 0.951, valid loss/error: 0.255 29.00
+Average loss over 10917221 tokens: 0.959, valid loss/error: 0.268 29.01
+Average loss over 10909404 tokens: 0.955, valid loss/error: 0.340 29.00
+Average loss over 10921568 tokens: 0.956, valid loss/error: 0.306 29.02
+Average loss over 10926376 tokens: 0.955, valid loss/error: 0.293 29.01
+Average loss over 10906125 tokens: 0.956, valid loss/error: 0.310 29.02
+Average loss over 10929309 tokens: 0.952, valid loss/error: 0.235 28.99
+Average loss over 10917142 tokens: 0.957, valid loss/error: 0.266 29.03
+Average loss over 10936099 tokens: 0.954, valid loss/error: 0.286 28.99
+Average loss over 10930923 tokens: 0.951, valid loss/error: 0.284 28.98
+New best model saved
+Average loss over 10936226 tokens: 0.952, valid loss/error: 0.305 28.99
+Average loss over 10911126 tokens: 0.956, valid loss/error: 0.307 29.05
+Average loss over 10908710 tokens: 0.958, valid loss/error: 0.244 29.03
+Average loss over 10927533 tokens: 0.961, valid loss/error: 0.372 29.01
+Average loss over 10947423 tokens: 0.967, valid loss/error: 0.331 29.03
+Average loss over 10936037 tokens: 0.959, valid loss/error: 0.286 29.04
+Average loss over 10917670 tokens: 0.958, valid loss/error: 0.278 29.04
+Average loss over 10934998 tokens: 0.955, valid loss/error: 0.275 28.98
+Average loss over 10907561 tokens: 0.956, valid loss/error: 0.305 28.99
+Average loss over 10917536 tokens: 0.961, valid loss/error: 0.337 29.03
+Average loss over 10904332 tokens: 0.960, valid loss/error: 0.308 29.03
+Average loss over 10922474 tokens: 0.956, valid loss/error: 0.244 29.05
+Average loss over 10903682 tokens: 0.953, valid loss/error: 0.275 29.02
+Average loss over 10923041 tokens: 0.955, valid loss/error: 0.386 29.02
+Average loss over 2701440 tokens: 0.971
+Epoch: 6, train loss: 0.957, valid loss/error: 0.282 29.02
+Average loss over 10914090 tokens: 0.955, valid loss/error: 0.271 29.04
+Average loss over 10925620 tokens: 0.950, valid loss/error: 0.269 29.02
+Average loss over 10915673 tokens: 0.950, valid loss/error: 0.267 28.99
+Average loss over 10917383 tokens: 0.957, valid loss/error: 0.302 29.02
+Average loss over 10910479 tokens: 0.953, valid loss/error: 0.249 29.03
+Average loss over 10932402 tokens: 0.962, valid loss/error: 0.242 29.03
+Average loss over 10953204 tokens: 0.958, valid loss/error: 0.267 29.00
+Average loss over 10931918 tokens: 0.956, valid loss/error: 0.305 28.99
+Average loss over 10924949 tokens: 0.949, valid loss/error: 0.265 28.97
+New best model saved
+Average loss over 10894172 tokens: 0.952, valid loss/error: 0.316 29.01
+Average loss over 10933368 tokens: 0.956, valid loss/error: 0.246 29.03
+Average loss over 10910736 tokens: 0.959, valid loss/error: 0.274 29.03
+Average loss over 10907852 tokens: 0.957, valid loss/error: 0.326 29.01
+Average loss over 10919872 tokens: 0.959, valid loss/error: 0.277 29.03
+Average loss over 10928292 tokens: 0.959, valid loss/error: 0.285 28.99
+Average loss over 10927168 tokens: 0.952, valid loss/error: 0.276 28.98
+Average loss over 10896796 tokens: 0.951, valid loss/error: 0.280 29.00
+Average loss over 10912719 tokens: 0.953, valid loss/error: 0.295 29.01
+Average loss over 10916423 tokens: 0.949, valid loss/error: 0.270 29.01
+Average loss over 10907376 tokens: 0.953, valid loss/error: 0.271 28.99
+Average loss over 10914846 tokens: 0.950, valid loss/error: 0.270 28.99
+Average loss over 10938304 tokens: 0.966, valid loss/error: 0.267 29.02
+Average loss over 10922390 tokens: 0.957, valid loss/error: 0.315 29.00
+Average loss over 10948367 tokens: 0.961, valid loss/error: 0.313 28.97
+Average loss over 10891930 tokens: 0.954, valid loss/error: 0.319 29.00
+Average loss over 10914314 tokens: 0.948, valid loss/error: 0.260 28.98
+Average loss over 10906159 tokens: 0.947, valid loss/error: 0.285 29.01
+Average loss over 10923642 tokens: 0.959, valid loss/error: 0.302 29.01
+Average loss over 10925692 tokens: 0.952, valid loss/error: 0.307 29.01
+Average loss over 10928650 tokens: 0.954, valid loss/error: 0.298 28.99
+Average loss over 10919123 tokens: 0.955, valid loss/error: 0.235 29.02
+Average loss over 10936840 tokens: 0.942, valid loss/error: 0.255 29.00
+Average loss over 10914644 tokens: 0.947, valid loss/error: 0.300 29.01
+Average loss over 10920249 tokens: 0.954, valid loss/error: 0.260 28.99
+Average loss over 10913419 tokens: 0.948, valid loss/error: 0.247 28.95
+New best model saved
+Average loss over 10917289 tokens: 0.963, valid loss/error: 0.289 28.99
+Average loss over 10898133 tokens: 0.952, valid loss/error: 0.241 28.97
+Average loss over 10948741 tokens: 0.960, valid loss/error: 0.309 28.95
+Average loss over 10906269 tokens: 0.954, valid loss/error: 0.254 28.97
+Average loss over 10918049 tokens: 0.950, valid loss/error: 0.290 28.95
+New best model saved
+Average loss over 10926534 tokens: 0.958, valid loss/error: 0.302 29.00
+Average loss over 10926099 tokens: 0.953, valid loss/error: 0.323 28.98
+Average loss over 2705389 tokens: 0.969
+Epoch: 7, train loss: 0.954, valid loss/error: 0.295 28.99
+Average loss over 10935898 tokens: 0.952, valid loss/error: 0.287 29.00
+Average loss over 10922464 tokens: 0.948, valid loss/error: 0.289 29.01
+Average loss over 10923252 tokens: 0.954, valid loss/error: 0.219 29.00
+New best model saved
+Average loss over 10936610 tokens: 0.956, valid loss/error: 0.273 28.99
+Average loss over 10913263 tokens: 0.950, valid loss/error: 0.261 29.04
+Average loss over 10937605 tokens: 0.950, valid loss/error: 0.302 28.99
+Average loss over 10922082 tokens: 0.945, valid loss/error: 0.332 29.00
+Average loss over 10938934 tokens: 0.954, valid loss/error: 0.271 28.95
+Average loss over 10908715 tokens: 0.951, valid loss/error: 0.270 28.98
+Average loss over 10903342 tokens: 0.954, valid loss/error: 0.253 28.95
+Average loss over 10924114 tokens: 0.951, valid loss/error: 0.320 28.96
+Average loss over 10929296 tokens: 0.952, valid loss/error: 0.331 28.97
+Average loss over 10912073 tokens: 0.958, valid loss/error: 0.307 28.99
+Average loss over 10929629 tokens: 0.950, valid loss/error: 0.289 28.97
+Average loss over 10913116 tokens: 0.955, valid loss/error: 0.214 29.01
+New best model saved
+Average loss over 10907634 tokens: 0.944, valid loss/error: 0.275 28.99
+Average loss over 10926362 tokens: 0.958, valid loss/error: 0.215 29.03
+Average loss over 10941178 tokens: 0.948, valid loss/error: 0.267 29.02
+Average loss over 10896230 tokens: 0.950, valid loss/error: 0.208 29.02
+New best model saved
+Average loss over 10913749 tokens: 0.953, valid loss/error: 0.286 29.03
+Average loss over 10913383 tokens: 0.949, valid loss/error: 0.245 28.97
+Average loss over 10913560 tokens: 0.952, valid loss/error: 0.288 28.98
+Average loss over 10947040 tokens: 0.948, valid loss/error: 0.189 28.99
+New best model saved
+Average loss over 10899972 tokens: 0.949, valid loss/error: 0.285 28.98
+Average loss over 10936091 tokens: 0.951, valid loss/error: 0.285 29.00
+Average loss over 10921856 tokens: 0.957, valid loss/error: 0.334 28.99
+Average loss over 10902577 tokens: 0.949, valid loss/error: 0.316 28.99
+Average loss over 10902943 tokens: 0.947, valid loss/error: 0.275 28.99
+Average loss over 10907494 tokens: 0.946, valid loss/error: 0.217 28.99
+Average loss over 10912874 tokens: 0.954, valid loss/error: 0.398 29.01
+Average loss over 10918659 tokens: 0.949, valid loss/error: 0.246 29.00
+Average loss over 10934822 tokens: 0.953, valid loss/error: 0.298 29.00
+Average loss over 10912586 tokens: 0.959, valid loss/error: 0.287 29.00
+Average loss over 10921260 tokens: 0.963, valid loss/error: 0.285 28.98
+Average loss over 10907607 tokens: 0.951, valid loss/error: 0.223 28.98
+Average loss over 10905793 tokens: 0.950, valid loss/error: 0.256 28.97
+Average loss over 10926464 tokens: 0.962, valid loss/error: 0.286 28.97
+Average loss over 10930186 tokens: 0.948, valid loss/error: 0.238 28.97
+Average loss over 10888584 tokens: 0.955, valid loss/error: 0.246 28.98
+Average loss over 10939226 tokens: 0.953, valid loss/error: 0.258 28.94
+New best model saved
+Average loss over 10910189 tokens: 0.947, valid loss/error: 0.312 28.94
+New best model saved
+Average loss over 10913605 tokens: 0.944, valid loss/error: 0.343 28.94
+Average loss over 2700118 tokens: 0.955
+Epoch: 8, train loss: 0.952, valid loss/error: 0.247 28.97
+Average loss over 10943968 tokens: 0.956, valid loss/error: 0.247 28.98
+Average loss over 10923060 tokens: 0.954, valid loss/error: 0.275 28.98
+Average loss over 10932937 tokens: 0.956, valid loss/error: 0.316 29.01
+Average loss over 10918701 tokens: 0.946, valid loss/error: 0.246 28.99
+Average loss over 10927552 tokens: 0.955, valid loss/error: 0.356 28.97
+Average loss over 10929478 tokens: 0.949, valid loss/error: 0.286 28.97
+Average loss over 10940789 tokens: 0.949, valid loss/error: 0.417 28.98
+Average loss over 10929455 tokens: 0.956, valid loss/error: 0.295 28.97
+Average loss over 10914644 tokens: 0.948, valid loss/error: 0.325 29.00
+Average loss over 10918245 tokens: 0.940, valid loss/error: 0.238 28.99
+Average loss over 10920134 tokens: 0.953, valid loss/error: 0.250 28.94
+Average loss over 10936800 tokens: 0.948, valid loss/error: 0.378 28.95
+Average loss over 10906479 tokens: 0.941, valid loss/error: 0.274 28.98
+Average loss over 10925734 tokens: 0.946, valid loss/error: 0.329 28.98
+Average loss over 10896026 tokens: 0.948, valid loss/error: 0.269 28.95
+Average loss over 10937958 tokens: 0.944, valid loss/error: 0.165 28.94
+New best model saved
+Average loss over 10901981 tokens: 0.950, valid loss/error: 0.260 28.98
+Average loss over 10943606 tokens: 0.949, valid loss/error: 0.280 28.98
+Average loss over 10927843 tokens: 0.948, valid loss/error: 0.244 28.99
+Average loss over 10906781 tokens: 0.947, valid loss/error: 0.221 29.00
+Average loss over 10900739 tokens: 0.943, valid loss/error: 0.308 28.96
+Average loss over 10911807 tokens: 0.953, valid loss/error: 0.331 28.92
+New best model saved
+Average loss over 10910152 tokens: 0.949, valid loss/error: 0.246 28.94
+Average loss over 10906254 tokens: 0.959, valid loss/error: 0.322 28.98
+Average loss over 10917320 tokens: 0.942, valid loss/error: 0.218 28.94
+Average loss over 10916415 tokens: 0.948, valid loss/error: 0.384 28.96
+Average loss over 10935327 tokens: 0.949, valid loss/error: 0.237 28.93
+Average loss over 10925576 tokens: 0.955, valid loss/error: 0.254 28.94
+Average loss over 10910010 tokens: 0.949, valid loss/error: 0.232 28.97
+Average loss over 10914310 tokens: 0.944, valid loss/error: 0.242 28.96
+Average loss over 10929239 tokens: 0.950, valid loss/error: 0.300 28.98
+Average loss over 10912738 tokens: 0.949, valid loss/error: 0.326 28.93
+Average loss over 10929863 tokens: 0.948, valid loss/error: 0.269 28.93
+Average loss over 10930977 tokens: 0.953, valid loss/error: 0.313 28.95
+Average loss over 10921150 tokens: 0.946, valid loss/error: 0.343 28.97
+Average loss over 10892703 tokens: 0.953, valid loss/error: 0.200 28.97
+Average loss over 10938414 tokens: 0.947, valid loss/error: 0.308 28.92
+New best model saved
+Average loss over 10918872 tokens: 0.947, valid loss/error: 0.255 28.97
+Average loss over 10902993 tokens: 0.951, valid loss/error: 0.255 28.93
+Average loss over 10912491 tokens: 0.947, valid loss/error: 0.322 28.91
+New best model saved
+Average loss over 10922670 tokens: 0.954, valid loss/error: 0.244 28.90
+New best model saved
+Average loss over 10904484 tokens: 0.941, valid loss/error: 0.229 28.93
+Average loss over 2693372 tokens: 0.955
+Epoch: 9, train loss: 0.949, valid loss/error: 0.233 28.97
+Average loss over 10929873 tokens: 0.951, valid loss/error: 0.202 28.94
+Average loss over 10913400 tokens: 0.943, valid loss/error: 0.195 28.94
+Average loss over 10917751 tokens: 0.948, valid loss/error: 0.216 28.95
+Average loss over 10920630 tokens: 0.953, valid loss/error: 0.282 28.91
+Average loss over 10936407 tokens: 0.944, valid loss/error: 0.316 28.97
+Average loss over 10920661 tokens: 0.957, valid loss/error: 0.265 28.95
+Average loss over 10929047 tokens: 0.943, valid loss/error: 0.156 28.94
+New best model saved
+Average loss over 10907907 tokens: 0.943, valid loss/error: 0.274 28.92
+Average loss over 10924403 tokens: 0.955, valid loss/error: 0.309 28.92
+Average loss over 10912958 tokens: 0.953, valid loss/error: 0.270 28.93
+Average loss over 10931653 tokens: 0.953, valid loss/error: 0.278 28.90
+New best model saved
+Average loss over 10903228 tokens: 0.948, valid loss/error: 0.237 28.92
+Average loss over 10930095 tokens: 0.954, valid loss/error: 0.221 28.93
+Average loss over 10954766 tokens: 0.945, valid loss/error: 0.361 28.96
+Average loss over 10923539 tokens: 0.948, valid loss/error: 0.322 28.96
+Average loss over 10918662 tokens: 0.943, valid loss/error: 0.204 28.92
+Average loss over 10923115 tokens: 0.948, valid loss/error: 0.287 28.94
+Average loss over 10942443 tokens: 0.951, valid loss/error: 0.314 28.92
+Average loss over 10925564 tokens: 0.954, valid loss/error: 0.279 28.93
+Average loss over 10921071 tokens: 0.949, valid loss/error: 0.243 28.90
+Average loss over 10900492 tokens: 0.942, valid loss/error: 0.239 28.94
+Average loss over 10925330 tokens: 0.941, valid loss/error: 0.247 28.93
+Average loss over 10922223 tokens: 0.949, valid loss/error: 0.314 28.92
+Average loss over 10923111 tokens: 0.950, valid loss/error: 0.273 28.93
+Average loss over 10920470 tokens: 0.953, valid loss/error: 0.239 28.95
+Average loss over 10927275 tokens: 0.948, valid loss/error: 0.201 28.95
+Average loss over 10902965 tokens: 0.946, valid loss/error: 0.327 28.93
+Average loss over 10952542 tokens: 0.944, valid loss/error: 0.231 28.95
+Average loss over 10916647 tokens: 0.943, valid loss/error: 0.215 28.89
+New best model saved
+Average loss over 10907200 tokens: 0.948, valid loss/error: 0.241 28.91
+Average loss over 10915231 tokens: 0.949, valid loss/error: 0.225 28.91
+Average loss over 10922702 tokens: 0.948, valid loss/error: 0.171 28.91
+Average loss over 10931558 tokens: 0.942, valid loss/error: 0.273 28.92
+Average loss over 10938740 tokens: 0.951, valid loss/error: 0.363 28.92
+Average loss over 10922438 tokens: 0.938, valid loss/error: 0.239 28.96
+Average loss over 10920430 tokens: 0.945, valid loss/error: 0.276 28.94
+Average loss over 10925462 tokens: 0.948, valid loss/error: 0.249 28.89
+New best model saved
+Average loss over 10909745 tokens: 0.951, valid loss/error: 0.312 28.89
+Average loss over 10917234 tokens: 0.946, valid loss/error: 0.287 28.96
+Average loss over 10923152 tokens: 0.943, valid loss/error: 0.336 28.93
+Average loss over 10932651 tokens: 0.941, valid loss/error: 0.244 28.95
+Average loss over 10929544 tokens: 0.941, valid loss/error: 0.186 28.93
+Average loss over 2704620 tokens: 0.951
+Epoch: 10, train loss: 0.947, valid loss/error: 0.276 28.92
+Average loss over 10914963 tokens: 0.947, valid loss/error: 0.338 28.93
+Average loss over 10910094 tokens: 0.957, valid loss/error: 0.313 28.96
+Average loss over 10920637 tokens: 0.952, valid loss/error: 0.189 28.93
+Average loss over 10920970 tokens: 0.947, valid loss/error: 0.230 28.95
+Average loss over 10925126 tokens: 0.946, valid loss/error: 0.262 28.95
+Average loss over 10931668 tokens: 0.956, valid loss/error: 0.188 28.93
+Average loss over 10907158 tokens: 0.942, valid loss/error: 0.203 28.93
+Average loss over 10904798 tokens: 0.946, valid loss/error: 0.309 28.94
+Average loss over 10909237 tokens: 0.938, valid loss/error: 0.197 28.96
+Average loss over 10922433 tokens: 0.944, valid loss/error: 0.268 28.96
+Average loss over 10917380 tokens: 0.941, valid loss/error: 0.214 28.95
+Average loss over 10925219 tokens: 0.946, valid loss/error: 0.199 28.93
+Average loss over 10915755 tokens: 0.949, valid loss/error: 0.218 28.92
+Average loss over 10915481 tokens: 0.952, valid loss/error: 0.341 28.94
+Average loss over 10901945 tokens: 0.945, valid loss/error: 0.385 28.93
+Traceback (most recent call last):
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 509, in <module>
+    terr, done_tokens, cur_checkid, remain_steps, _Dws = train(low_td,middle_td,high_td, tl, vd, nvalid, stu_optimizer, stu_lrsch, high_teach_model,teach_model,student_model, lossf,distilllossf,
+  File "/home/yfguo/transformer_924/enfr_latest_2teacher_train_distill_sample_CAB04061.py", line 100, in train
+    distill_loss = distilllossf(lossf,high_teach_out_softmax_withoutT,teach_out_softmax_withoutT,stu_out_softmax_withoutT,
+  File "/home/yfguo/miniconda3/envs/Trans_base/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/yfguo/transformer_924/loss/distill_double_baseCAB04061.py", line 66, in forward
+    total_batch_word_num = data_mask.int().sum().item()
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
